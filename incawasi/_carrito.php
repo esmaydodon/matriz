@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?
 include("func/funciones.php");
+//hola
 ?>
 <meta name="verify-v1" content="HVBxLs/wqY+07YtWvJgwcuftNbp3xZ8iUvGLivZlvRA=" />
 <script type="text/javascript" src="js/ajax.js"></script>

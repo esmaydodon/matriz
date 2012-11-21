@@ -199,7 +199,7 @@ Personal Message:<textarea name='aquienDedicaMensaje' id='aquienDedicaMensaje' c
   
     <form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" 
     method="post"> 
- <!--<input type="hidden" name="cmd" value="_s-xclick">--> 
+  <input type="hidden" name="cmd" value="_s-xclick">  
 <!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
 <!--#--------------------------------------------------------------------------------------notify_url>
 <?php $resultado = dime("SELECT MAX(idCompras)  FROM compras") or die(mysql_error());

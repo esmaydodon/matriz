@@ -31,54 +31,6 @@ $nombre_producto = quitar($_GET["nombre"]);
  
 	  });
 	 })
-/*jQuery.ajax({
-type: "POST", 
-url: "registranDocliente.php",
-data:'idc='+idCliente,'nom='+nombreCliente,'ema='+EmailComprador,'pais='+pais,
-success: function(a) {
-jQuery('#poblacionList').html(a);
-var to=document.getElementById("Buscando");
-to.innerHTML="";
-}
-});*/
-/*//-- Llamada GET
-jQuery('#test').load('servidor.php');
-//-- Llamada GET
-jQuery('#test').load('servidor.php', 'nombre=John&apellido=Doe');
-//-- Llamada POST
-jQuery('#test').load('servidor.php', {nombre: 'John', apellido: 'Doe'});*/
-/*function registrarCliente2(){
-	var nombreCliente =document.getElementById("NombreComprador").value;
-	var emailCliente =document.getElementById("EmailComprador").value;
-	var paisCliente =document.getElementById("pais").value;
-	var idCliente =document.getElementById("idCliente").value;
-//Envio las variables nombre=Pepe, apellido= Grillo al archivo mi_php.php
-$.post("registranDocliente.php",{'idc':idCliente,'nom':nombreCliente,'ema':EmailComprador,'pais':pais},function(data){
-//$('.results').html(data);//Mostramos un alert del resultado devuelto por el php
-  alert('...');
-});
-}*/
-/*jQuery.post('procesadora.php', {}, function(data){
- jQuery('#test').text(data);
- 
-});*/
-
-/*$.ajax({
-  url: 'response.php?action=sample1',
-  success: function(data) {
-    $('.results').html(data);
-  }
-});*/
-
-/*$.ajax({
-  type: 'POST',
-  url: 'response.php?action=sample2',
-  data: 'name=Andrew&nickname=Aramis',
-  success: function(data){
-    $('.results').html(data);
-  }
-});*/
-/*echo 'Sample 2 - success, name = ' . $_POST['name'] . ', nickname= ' . $_POST['nickname'];*/
 </SCRIPT>
 <style type="text/css">
 #paso3{ display:none;}
@@ -221,7 +173,11 @@ echo " <input name='idCliente' type='hidden' id='idCliente' size='30' maxlength=
  
  ?>
   <input type='hidden' name='namefecha1' id ='fecha1' value='<? echo date("Y/m/d H:i:s"); ?>' /><br>
- <input type="hidden" name="monto" id ="monto" value="<? echo $precio_producto;?>" />
+      <? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
+while ($producto=mysql_fetch_array($consulta_productos)){
+ echo "<input type='hidden' name='monto' id ='monto' value='".$precio_producto."'/>";
+}?>
+
    <input type="button"  id="botonRegistrarUsuario" value="Next" onclick="registrarCliente()">
  </div>  </div>
     <div id="mensaje"> </div>
@@ -240,7 +196,11 @@ Personal Message:<textarea name='aquienDedicaMensaje' id='aquienDedicaMensaje' c
 <!--  end  paraquien -------------------------------------->  
 <!---------------------------------------------------------------------------------FORMULARIO PARA PAYPAL-->
 <div id="paso3">
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+  
+    <form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" 
+    method="post"> 
+ <!--<input type="hidden" name="cmd" value="_s-xclick">--> 
+<!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
 <!--#--------------------------------------------------------------------------------------notify_url>
 <?php $resultado = dime("SELECT MAX(idCompras)  FROM compras") or die(mysql_error());
 $numero=mysql_fetch_array($resultado);
@@ -259,11 +219,15 @@ $numero=mysql_fetch_array($resultado);
 <input name='notify_url' type='hidden' value='http://www.incawasi.kuraka.net/paypal_ipn.php'>
 <input name="item_number_1" type="hidden" value="<? echo $id_producto;?> ">
 <input name="item_name_1" type="hidden" value="<? echo $nombre_producto;?>"> 
-<input name="amount_1" type="hidden" value="<? echo $precio_producto;?>"> 
+    <? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
+while ($producto=mysql_fetch_array($consulta_productos)){
+ echo "<input name='amount_1' type='hidden' value='".$producto['precio_producto']."'>";
+ } 
+ ?>
 <input name="quantity_1" type="hidden" value="1"> 
-<input type="image" name="submit" border="0" 
-src="https://www.paypal.com/en_US/i/btn/btn_buynow_LG.gif" 
-alt="PayPal - The safer, easier way to pay online"> 
+    <input type="hidden" name="hosted_button_id" value="34X5TWMSE6FQY"></input>
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1"></img>
 </form>
 
 </div>

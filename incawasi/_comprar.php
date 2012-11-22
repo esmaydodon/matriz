@@ -7,7 +7,7 @@ include("func/funciones.php");
 $id_producto = quitar($_GET["idproducto"]); 
 $precio_producto = quitar($_GET["pre"]); 
 $nombre_producto = quitar($_GET["nombre"]); 
-
+//modificado 22/11/12
 ?>
 <meta name="verify-v1" content="HVBxLs/wqY+07YtWvJgwcuftNbp3xZ8iUvGLivZlvRA=" />
 <title>Bienvenidos</title>

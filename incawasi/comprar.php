@@ -221,7 +221,7 @@ $numero=mysql_fetch_array($resultado);
 <input name="item_name_1" type="hidden" value="<? echo $nombre_producto;?>"> 
     <? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
 while ($producto=mysql_fetch_array($consulta_productos)){
- echo "<input name='amount_1' type='hidden' value='".$producto['precio_producto']."'>";
+ echo "<input name='amount_1' type='hidden' value='".$producto['precio']."'>";
 /*
  * notify_url: op. ipn
  * hosted_button_id: botones que se an guardado en cuenta paypal

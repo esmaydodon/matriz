@@ -197,8 +197,7 @@ Personal Message:<textarea name='aquienDedicaMensaje' id='aquienDedicaMensaje' c
 <!---------------------------------------------------------------------------------FORMULARIO PARA PAYPAL-->
 <div id="paso3">
   
-    <form name="_xclick" action="https://www.sandbox.paypal.com/cgi-bin/webscr" 
-    method="post"> 
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post"> 
   <input type="hidden" name="cmd" value="_s-xclick">  
 <!--<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
 <!--#--------------------------------------------------------------------------------------notify_url>
@@ -210,6 +209,7 @@ $numero=mysql_fetch_array($resultado);
 ?>
 <!--#-----------------------------------------------------------------------notify_url>
 <input name="cmd" type="hidden" value="_cart"> <!--cmd=_notify-validat-->
+
 <input name="upload" type="hidden" value="1">
 <input name="business" type="hidden" value="marlon_1319077527_biz@hotmail.com">
 <input name="shopping_url" type="hidden" value="http://incawasi.kuraka.net/">
@@ -222,11 +222,18 @@ $numero=mysql_fetch_array($resultado);
     <? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
 while ($producto=mysql_fetch_array($consulta_productos)){
  echo "<input name='amount_1' type='hidden' value='".$producto['precio_producto']."'>";
+/*
+ * notify_url: op. ipn
+ * hosted_button_id: botones que se an guardado en cuenta paypal
+ *                  de locontrario no permite, 1.000 botones de pago cuard
+ */
  } 
  ?>
 <input name="quantity_1" type="hidden" value="1"> 
-    <input type="hidden" name="hosted_button_id" value="34X5TWMSE6FQY"></input>
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <input type="hidden" name="hosted_button_id" value="75D9ELWBUH89S"></input>
+<!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
+    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal, la forma más segura y rápida de pagar en línea."></input>
+
     <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1"></img>
 </form>
 

@@ -1,4 +1,6 @@
 <?
+session_start(); 
+$cliente=$_SESSION['cliente'];
 // read the post from PayPal system and add 'cmd'
 $req = 'cmd=_notify-validate';
 #--------------------------------------------------------
@@ -94,7 +96,21 @@ mysql_query("INSERT INTO users SET id = '$rand', realname = '$name', acc_type = 
 #-------------------------------email conprador--
 $to      = $email;
 $subject = 'Download Area | Login Credentials';
-$message = '
+if($cliente){
+	 foreach($cliente as $k => $c){
+             if(!$c || !isset($c[md5($c['idcliente'])]['identificador']) || $c[md5($c['idcliente'])]['identificador']!= md5($c['idcliente'])){ 
+$cadenaAgregarQuitar="<a href='borracarCliente.php?SID&id=".$c['idcliente']."&dedo=".$dedonde."'>
+<img src='../imagenes/trash.gif' border='0' title='Agregar al Carrito'></a>'";	
+		}else{
+	$cadenaAgregarQuitar="<a  class='ocultar_para_imprimir'  href='agregaCliente.php?SID&id=".$c['idcliente']."&dedo=".$dedonde."'>
+<img src='../imagenes/productonoagregado.gif' border='0' title='Agregar al Carrito'></a>'";
+	}
+		 $clientecadena="<h2>Nombre:".$c['nombre_apellidos_usu']."<br>";
+		   $clientecadena.=" email_usuario:".$c['email_usuario']."<br>";
+		   $clientecadena.="DNI:".$c['dni_cliente']."<br>";
+		  $clientecadena.="telefono_usuario:".$c['telefono_usuario'].$cadenaAgregarQuitar."</h2>"; }
+	 }
+$message = $clientecadena.'
 
 Thank you for your purchase
 

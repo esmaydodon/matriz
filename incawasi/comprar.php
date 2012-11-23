@@ -219,7 +219,7 @@ $numero=mysql_fetch_array($resultado);
 <input name='notify_url' type='hidden' value='http://www.incawasi.kuraka.net/paypal_ipn.php'>
 <input name="item_number_1" type="hidden" value="<? echo $id_producto;?> ">
 <input name="item_name_1" type="hidden" value="<? echo $nombre_producto;?>"> 
-    <? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
+<? $consulta_productos=dime("select idproductos,nombre_producto,descripcion_producto,precio,ruta_img1 from productos where idproductos = $id_producto "); 
 while ($producto=mysql_fetch_array($consulta_productos)){
  echo "<input name='amount_1' type='hidden' value='".$producto['precio']."'>";
 /*
@@ -229,6 +229,7 @@ while ($producto=mysql_fetch_array($consulta_productos)){
  */
  } 
  ?>
+    
 <input name="quantity_1" type="hidden" value="1"> 
     <input type="hidden" name="hosted_button_id" value="75D9ELWBUH89S"></input>
 <!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">-->
